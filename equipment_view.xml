@@ -4,14 +4,75 @@
         <record model="ir.ui.view" id="v_cat_tree"><field name="name">cat.tree</field><field name="model">equipment.category</field><field name="arch" type="xml"><tree string="Loại"><field name="name"/><field name="description"/></tree></field></record>
         <record model="ir.ui.view" id="v_cat_form"><field name="name">cat.form</field><field name="model">equipment.category</field><field name="arch" type="xml"><form string="Loại"><group><field name="name"/><field name="description"/></group></form></field></record>
 
-        <record model="ir.ui.view" id="v_brand_tree"><field name="name">brand.tree</field><field name="model">equipment.brand</field><field name="arch" type="xml"><tree string="Thương hiệu"><field name="name"/><field name="country"/></tree></field></record>
-        <record model="ir.ui.view" id="v_brand_form"><field name="name">brand.form</field><field name="model">equipment.brand</field><field name="arch" type="xml"><form string="Thương hiệu"><group><field name="name"/><field name="country"/></group></form></field></record>
+        
 
         <record model="ir.ui.view" id="v_prod_tree"><field name="name">prod.tree</field><field name="model">equipment.product</field><field name="arch" type="xml"><tree string="Sản phẩm"><field name="name"/><field name="category_id"/><field name="brand_id"/><field name="qty_available"/><field name="price"/></tree></field></record>
         <record model="ir.ui.view" id="v_prod_form"><field name="name">prod.form</field><field name="model">equipment.product</field><field name="arch" type="xml"><form string="Sản phẩm"><group col="4"><field name="name"/><field name="category_id"/><field name="brand_id"/><field name="price"/><field name="qty_available"/></group><field name="specifications"/></form></field></record>
 
-        <record model="ir.ui.view" id="v_inv_tree"><field name="name">inv.tree</field><field name="model">equipment.inventory</field><field name="arch" type="xml"><tree string="Kho"><field name="date"/><field name="product_id"/><field name="type"/><field name="quantity"/></tree></field></record>
-        <record model="ir.ui.view" id="v_inv_form"><field name="name">inv.form</field><field name="model">equipment.inventory</field><field name="arch" type="xml"><form string="Kho"><group><field name="product_id"/><field name="type"/><field name="quantity"/><field name="note"/></group></form></field></record>
+        <record model="ir.ui.view" id="v_brand_tree">
+            <field name="name">brand.tree</field>
+            <field name="model">equipment.brand</field>
+            <field name="arch" type="xml">
+                <tree string="Thương hiệu">
+                    <field name="name"/>
+                    <field name="country"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="v_brand_form">
+            <field name="name">brand.form</field>
+            <field name="model">equipment.brand</field>
+            <field name="arch" type="xml">
+                <form string="Thương hiệu" version="7.0">
+                    <field name="logo" widget="image" class="oe_avatar oe_left"/>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <field name="country"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="v_inv_tree">
+            <field name="name">inv.tree</field>
+            <field name="model">equipment.inventory</field>
+            <field name="arch" type="xml">
+                <tree string="Kho" colors="blue:state=='draft';green:state=='done'">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="product_id"/>
+                    <field name="type"/>
+                    <field name="quantity"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="v_inv_form">
+            <field name="name">inv.form</field>
+            <field name="model">equipment.inventory</field>
+            <field name="arch" type="xml">
+                <form string="Kho" version="7.0">
+                    <header>
+                        <button name="action_done" string="Xác nhận" type="object" states="draft" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                    </header>
+                    <sheet>
+                        <h1><field name="name"/></h1>
+                        <group col="4">
+                            <field name="product_id"/>
+                            <field name="type"/>
+                            <field name="quantity"/>
+                            <field name="date"/>
+                            <field name="user_id"/>
+                            <field name="note"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
         <record model="ir.actions.act_window" id="act_prod"><field name="name">Thiết bị</field><field name="res_model">equipment.product</field><field name="view_mode">tree,form</field></record>
         <record model="ir.actions.act_window" id="act_prod_cat"><field name="name">Sản phẩm theo loại</field><field name="res_model">equipment.product</field><field name="view_mode">tree,form</field><field name="context">{'group_by':'category_id'}</field></record>
