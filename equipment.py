@@ -7,6 +7,8 @@ class equipment_category(osv.osv):
         'name': fields.char('Tên loại', size=64, required=True),
         'description': fields.text('Mô tả'),
     }
+    equipment_category()
+
 
 class equipment_brand(osv.osv):
     _name = 'equipment.brand'
@@ -14,6 +16,8 @@ class equipment_brand(osv.osv):
         'name': fields.char('Tên thương hiệu', size=64, required=True),
         'country': fields.char('Quốc gia'),
     }
+    equipment_brand()
+
 
 class equipment_product(osv.osv):
     _name = 'equipment.product'
@@ -25,6 +29,8 @@ class equipment_product(osv.osv):
         'price': fields.float('Đơn giá'),
         'specifications': fields.text('Thông số kỹ thuật'),
     }
+    equipment_product()
+
 
 class equipment_inventory(osv.osv):
     _name = 'equipment.inventory'
@@ -36,6 +42,7 @@ class equipment_inventory(osv.osv):
         'note': fields.char('Ghi chú'),
     }
     _defaults = {'date': lambda *a: fields.datetime.now()}
+    equipment_inventory()
 
     def create(self, cr, uid, vals, context=None):
         res_id = super(equipment_inventory, self).create(cr, uid, vals, context=context)
