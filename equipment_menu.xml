@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <menuitem id="menu_root" name="Quản lý thiết bị" sequence="10"/>
+
+        <menuitem id="m_1" name="1. Quản lý sản phẩm" parent="menu_root" sequence="1"/>
+            <menuitem id="m_1_1" name="Tất cả thiết bị" parent="m_1" action="act_prod"/>
+            <menuitem id="m_1_2" name="Sản phẩm theo loại" parent="m_1" action="act_prod_cat"/>
+
+        <menuitem id="m_2" name="2. Quản lý loại" parent="menu_root" sequence="2"/>
+            <menuitem id="m_2_1" name="Tất cả loại" parent="m_2" action="act_cat"/>
+
+        <menuitem id="m_3" name="3. Quản lý thương hiệu" parent="menu_root" sequence="3"/>
+            <menuitem id="m_3_1" name="Tất cả thương hiệu" parent="m_3" action="act_brand"/>
+
+        <menuitem id="m_4" name="4. Quản lý Kho" parent="menu_root" sequence="4"/>
+            <menuitem id="m_4_1" name="Tồn kho thực tế" parent="m_4" action="act_prod"/>
+            <menuitem id="m_4_2" name="Nhập/Xuất kho" parent="m_4" action="act_inv"/>
+    </data>
+</openerp>

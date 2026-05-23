@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="c1" model="equipment.category"><field name="name">RAM</field></record>
+        <record id="c2" model="equipment.category"><field name="name">CPU</field></record>
+        <record id="c3" model="equipment.category"><field name="name">Mainboard</field></record>
+        <record id="c4" model="equipment.category"><field name="name">SSD</field></record>
+        <record id="c5" model="equipment.category"><field name="name">VGA</field></record>
+
+        <record id="b1" model="equipment.brand"><field name="name">Intel</field><field name="country">USA</field></record>
+        <record id="b2" model="equipment.brand"><field name="name">NVIDIA</field><field name="country">USA</field></record>
+        <record id="b3" model="equipment.brand"><field name="name">Samsung</field><field name="country">Korea</field></record>
+        <record id="b4" model="equipment.brand"><field name="name">ASUS</field><field name="country">Taiwan</field></record>
+        <record id="b5" model="equipment.brand"><field name="name">Gigabyte</field><field name="country">Taiwan</field></record>
+
+        <record id="p1" model="equipment.product"><field name="name">Core i9-14900K</field><field name="category_id" ref="c2"/><field name="brand_id" ref="b1"/><field name="price">15000000</field></record>
+        <record id="p2" model="equipment.product"><field name="name">RTX 4090 ROG</field><field name="category_id" ref="c5"/><field name="brand_id" ref="b4"/><field name="price">55000000</field></record>
+        <record id="p3" model="equipment.product"><field name="name">980 PRO 1TB</field><field name="category_id" ref="c4"/><field name="brand_id" ref="b3"/><field name="price">3500000</field></record>
+        <record id="p4" model="equipment.product"><field name="name">Z790 AORUS</field><field name="category_id" ref="c3"/><field name="brand_id" ref="b5"/><field name="price">8000000</field></record>
+        <record id="p5" model="equipment.product"><field name="name">Dominator 32GB</field><field name="category_id" ref="c1"/><field name="brand_id" ref="b4"/><field name="price">4500000</field></record>
+
+        <record id="i1" model="equipment.inventory"><field name="product_id" ref="p1"/><field name="type">in</field><field name="quantity">10</field></record>
+        <record id="i2" model="equipment.inventory"><field name="product_id" ref="p2"/><field name="type">in</field><field name="quantity">5</field></record>
+        <record id="i3" model="equipment.inventory"><field name="product_id" ref="p3"/><field name="type">in</field><field name="quantity">20</field></record>
+        <record id="i4" model="equipment.inventory"><field name="product_id" ref="p4"/><field name="type">out</field><field name="quantity">2</field></record>
+        <record id="i5" model="equipment.inventory"><field name="product_id" ref="p5"/><field name="type">in</field><field name="quantity">50</field></record>
+    </data>
+</openerp>
