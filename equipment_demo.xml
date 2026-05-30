@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data noupdate="1">
-        <record id="c1" model="equipment.category"><field name="name">RAM</field></record>
-        <record id="c2" model="equipment.category"><field name="name">CPU</field></record>
-        <record id="c3" model="equipment.category"><field name="name">Mainboard</field></record>
-        <record id="c4" model="equipment.category"><field name="name">SSD</field></record>
-        <record id="c5" model="equipment.category"><field name="name">VGA</field></record>
+        <record id="cat_cpu" model="equipment.category"><field name="code">CPU</field><field name="name">Vi xử lý (CPU)</field></record>
+        <record id="cat_ram" model="equipment.category"><field name="code">RAM</field><field name="name">Bộ nhớ trong (RAM)</field></record>
+        <record id="cat_vga" model="equipment.category"><field name="code">VGA</field><field name="name">Card màn hình (VGA)</field></record>
+        <record id="cat_main" model="equipment.category"><field name="code">MAIN</field><field name="name">Bo mạch chủ (Mainboard)</field></record>
 
-        <record id="b1" model="equipment.brand"><field name="name">Intel</field><field name="country">USA</field></record>
-        <record id="b2" model="equipment.brand"><field name="name">NVIDIA</field><field name="country">USA</field></record>
-        <record id="b3" model="equipment.brand"><field name="name">Samsung</field><field name="country">Korea</field></record>
-        <record id="b4" model="equipment.brand"><field name="name">ASUS</field><field name="country">Taiwan</field></record>
-        <record id="b5" model="equipment.brand"><field name="name">Gigabyte</field><field name="country">Taiwan</field></record>
+        <record id="brand_asus" model="equipment.brand"><field name="name">ASUS</field><field name="hotline">1800-6588</field></record>
+        <record id="brand_msi" model="equipment.brand"><field name="name">MSI</field></record>
+        <record id="brand_intel" model="equipment.brand"><field name="name">Intel</field></record>
 
-        <record id="p1" model="equipment.product"><field name="name">Core i9-14900K</field><field name="category_id" ref="c2"/><field name="brand_id" ref="b1"/><field name="price">15000000</field></record>
-        <record id="p2" model="equipment.product"><field name="name">RTX 4090 ROG</field><field name="category_id" ref="c5"/><field name="brand_id" ref="b4"/><field name="price">55000000</field></record>
-        <record id="p3" model="equipment.product"><field name="name">980 PRO 1TB</field><field name="category_id" ref="c4"/><field name="brand_id" ref="b3"/><field name="price">3500000</field></record>
-        <record id="p4" model="equipment.product"><field name="name">Z790 AORUS</field><field name="category_id" ref="c3"/><field name="brand_id" ref="b5"/><field name="price">8000000</field></record>
-        <record id="p5" model="equipment.product"><field name="name">Dominator 32GB</field><field name="category_id" ref="c1"/><field name="brand_id" ref="b4"/><field name="price">4500000</field></record>
+        <record id="supp_1" model="equipment.partner"><field name="name">Nhà phân phối Viết Sơn</field><field name="is_supplier">True</field><field name="is_customer">False</field></record>
+        <record id="cust_1" model="equipment.partner"><field name="name">Nguyễn Văn A</field><field name="phone">0909123456</field><field name="membership_tier">silver</field><field name="points">150</field></record>
 
-        <record id="i1" model="equipment.inventory"><field name="product_id" ref="p1"/><field name="type">in</field><field name="quantity">10</field></record>
-        <record id="i2" model="equipment.inventory"><field name="product_id" ref="p2"/><field name="type">in</field><field name="quantity">5</field></record>
-        <record id="i3" model="equipment.inventory"><field name="product_id" ref="p3"/><field name="type">in</field><field name="quantity">20</field></record>
-        <record id="i4" model="equipment.inventory"><field name="product_id" ref="p4"/><field name="type">out</field><field name="quantity">2</field></record>
-        <record id="i5" model="equipment.inventory"><field name="product_id" ref="p5"/><field name="type">in</field><field name="quantity">50</field></record>
+        <record id="prod_vga" model="equipment.product">
+            <field name="default_code">RTX-4070</field><field name="name">VGA ASUS Dual RTX 4070</field>
+            <field name="category_id" ref="cat_vga"/><field name="brand_id" ref="brand_asus"/>
+            <field name="warranty">36</field><field name="standard_price">15000000</field><field name="price">16500000</field>
+        </record>
+        <record id="prod_cpu" model="equipment.product">
+            <field name="default_code">I5-13400F</field><field name="name">CPU Intel Core i5-13400F</field>
+            <field name="category_id" ref="cat_cpu"/><field name="brand_id" ref="brand_intel"/>
+            <field name="warranty">36</field><field name="standard_price">4500000</field><field name="price">5200000</field>
+        </record>
+
+        <record id="inv_in_vga" model="equipment.inventory"><field name="product_id" ref="prod_vga"/><field name="type">in</field><field name="reason">purchase</field><field name="quantity">2</field><field name="state">done</field></record>
+        <record id="inv_in_cpu" model="equipment.inventory"><field name="product_id" ref="prod_cpu"/><field name="type">in</field><field name="reason">purchase</field><field name="quantity">50</field><field name="state">done</field></record>
+
+        <record id="warranty_1" model="equipment.warranty">
+            <field name="name">SN-ASUS-RTX4070-001</field>
+            <field name="product_id" ref="prod_vga"/>
+            <field name="partner_id" ref="cust_1"/>
+            <field name="purchase_date">2024-01-15</field>
+            <field name="end_date">2027-01-15</field>
+            <field name="state">valid</field>
+        </record>
     </data>
 </openerp>

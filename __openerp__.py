@@ -1,8 +1,8 @@
 {
-    "name": "Equipment Management",
-    "version": "2.0",
+    "name": "Equipment Management - PC Retail",
+    "version": "4.0",
     "author": "VoChungKhanhDang",
-    "description": "Module quản lý thiết bị: Sản phẩm, Loại, Thương hiệu và Kho",
+    "description": "Quản lý chuỗi bán lẻ PC: Bán hàng, Kho, Khách hàng thành viên, Bảo hành Serial và Thống kê",
     "depends": ["base"],
     "update_xml": [
         "equipment_view.xml",

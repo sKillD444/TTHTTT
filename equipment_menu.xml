@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <menuitem id="menu_root" name="Quản lý thiết bị" sequence="10"/>
+        <menuitem id="menu_root" name="Hệ Thống Bán Lẻ PC" sequence="10"/>
 
-        <menuitem id="m_1" name="1. Quản lý sản phẩm" parent="menu_root" sequence="1"/>
-            <menuitem id="m_1_1" name="Tất cả thiết bị" parent="m_1" action="act_prod"/>
-            <menuitem id="m_1_2" name="Sản phẩm theo loại" parent="m_1" action="act_prod_cat"/>
+        <menuitem id="m_equip" name="1. Quản lý thiết bị" parent="menu_root" sequence="10"/>
+        <menuitem id="m_supp" name="2. Nhà cung cấp" parent="menu_root" sequence="20"/>
+        <menuitem id="m_stock" name="3. Kho" parent="menu_root" sequence="30"/>
+        <menuitem id="m_brand_cat" name="4. Thương hiệu/Loại" parent="menu_root" sequence="40"/>
+        <menuitem id="m_cust" name="5. Khách hàng" parent="menu_root" sequence="50"/>
+        <menuitem id="m_invoice" name="6. Hóa đơn" parent="menu_root" sequence="60"/>
 
-        <menuitem id="m_2" name="2. Quản lý loại" parent="menu_root" sequence="2"/>
-            <menuitem id="m_2_1" name="Tất cả loại" parent="m_2" action="act_cat"/>
+        <menuitem id="m_prod_all" name="Danh sách Hàng hóa" parent="m_equip" action="act_prod_all" sequence="1"/>
 
-        <menuitem id="m_3" name="3. Quản lý thương hiệu" parent="menu_root" sequence="3"/>
-            <menuitem id="m_3_1" name="Tất cả thương hiệu" parent="m_3" action="act_brand"/>
+        <menuitem id="m_partner_supp" name="Danh sách Nhà cung cấp" parent="m_supp" action="act_partner_supp" sequence="1"/>
 
-        <menuitem id="m_4" name="4. Quản lý Kho" parent="menu_root" sequence="4"/>
-            <menuitem id="m_4_1" name="Tồn kho thực tế" parent="m_4" action="act_prod"/>
-            <menuitem id="m_4_2" name="Nhập/Xuất kho" parent="m_4" action="act_inv"/>
+        <menuitem id="m_inv_in" name="Phiếu Nhập kho" parent="m_stock" action="act_inv_in" sequence="1"/>
+        <menuitem id="m_inv_out" name="Phiếu Xuất kho" parent="m_stock" action="act_inv_out" sequence="2"/>
+        <menuitem id="m_prod_alert" name="Cảnh báo Tồn kho" parent="m_stock" action="act_prod_alert" sequence="3"/>
+
+        <menuitem id="m_cat" name="Nhóm linh kiện" parent="m_brand_cat" action="act_cat" sequence="1"/>
+        <menuitem id="m_brand" name="Thương hiệu (Hãng)" parent="m_brand_cat" action="act_brand" sequence="2"/>
+
+        <menuitem id="m_partner_cust" name="Khách hàng thành viên" parent="m_cust" action="act_partner_cust" sequence="1"/>
+        <menuitem id="m_warranty" name="Tra cứu S/N Bảo hành" parent="m_cust" action="act_warranty" sequence="2"/>
+
+        <menuitem id="m_order_sale" name="Hóa đơn Bán lẻ" parent="m_invoice" action="act_order_sale" sequence="1"/>
+        <menuitem id="m_order_purch" name="Tạo đơn Nhập hàng (NCC)" parent="m_invoice" action="act_order_purch" sequence="2"/>
+        <menuitem id="m_dashboard_rev" name="Biểu đồ Doanh thu" parent="m_invoice" action="act_dashboard_revenue" sequence="3"/>
+
     </data>
 </openerp>
