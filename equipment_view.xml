@@ -11,9 +11,7 @@
             <field name="model">equipment.category</field>
             <field name="arch" type="xml">
                 <form string="Danh mục" version="7.0">
-                    <sheet>
-                        <group><field name="code"/><field name="name"/></group>
-                    </sheet>
+                    <sheet><group><field name="code"/><field name="name"/></group></sheet>
                 </form>
             </field>
         </record>
@@ -29,8 +27,56 @@
             <field name="arch" type="xml">
                 <form string="Thương hiệu" version="7.0">
                     <sheet>
+                        <field name="logo" widget="image" class="oe_avatar oe_left"/>
                         <div class="oe_title"><h1><field name="name" placeholder="Tên Hãng..."/></h1></div>
                         <group col="4"><field name="hotline"/><field name="email"/></group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="v_supplier_tree">
+            <field name="name">supplier.tree</field>
+            <field name="model">equipment.supplier</field>
+            <field name="arch" type="xml"><tree string="Nhà cung cấp"><field name="code"/><field name="name"/><field name="phone"/><field name="email"/><field name="tax_code"/></tree></field>
+        </record>
+        <record model="ir.ui.view" id="v_supplier_form">
+            <field name="name">supplier.form</field>
+            <field name="model">equipment.supplier</field>
+            <field name="arch" type="xml">
+                <form string="Nhà cung cấp" version="7.0">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name" placeholder="Tên nhà cung cấp thương mại..."/></h1>
+                            <div><field name="code" placeholder="Mã nhà cung cấp (VD: NCC_ASUS)"/></div>
+                        </div>
+                        <group col="4"><field name="phone"/><field name="email"/><field name="tax_code"/><field name="representative"/></group>
+                        <group><field name="address"/></group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="v_inv_tree">
+            <field name="name">inv.tree</field>
+            <field name="model">equipment.inventory</field>
+            <field name="arch" type="xml">
+                <tree string="Kho hàng" colors="blue:state=='draft';green:state=='done'"><field name="name"/><field name="product_id"/><field name="type"/><field name="quantity"/><field name="state"/></tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="v_inv_form">
+            <field name="name">inv.form</field>
+            <field name="model">equipment.inventory</field>
+            <field name="arch" type="xml">
+                <form string="Kho" version="7.0">
+                    <header>
+                        <button name="action_done" string="Xác nhận" type="object" states="draft" class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title"><h1><field name="name"/></h1></div>
+                        <group col="4"><field name="product_id"/><field name="type"/><field name="reason"/><field name="quantity"/><field name="date"/><field name="user_id"/></group>
+                        <group><field name="note"/></group>
                     </sheet>
                 </form>
             </field>
@@ -47,14 +93,9 @@
             <field name="arch" type="xml">
                 <form string="Đối tác" version="7.0">
                     <sheet>
-                        <div class="oe_title">
-                            <h1><field name="name" placeholder="Tên đối tác..."/></h1>
-                        </div>
-                        <group>
-                            <group col="4"><field name="phone"/><field name="email"/><field name="membership_tier"/><field name="points"/></group>
-                            <group><field name="address"/></group>
-                            <group col="4"><field name="is_customer"/><field name="is_supplier"/></group>
-                        </group>
+                        <div class="oe_title"><h1><field name="name" placeholder="Tên khách hàng..."/></h1></div>
+                        <group col="4"><field name="phone"/><field name="email"/><field name="membership_tier"/><field name="points"/></group>
+                        <group><field name="address"/></group>
                     </sheet>
                 </form>
             </field>
@@ -65,13 +106,7 @@
             <field name="model">equipment.product</field>
             <field name="arch" type="xml">
                 <tree string="Sản phẩm" colors="red:state=='out_of_stock';grey:state=='obsolete'">
-                    <field name="default_code"/>
-                    <field name="name"/>
-                    <field name="category_id"/>
-                    <field name="qty_available"/>
-                    <field name="standard_price"/>
-                    <field name="price"/>
-                    <field name="state"/>
+                    <field name="default_code"/><field name="name"/><field name="category_id"/><field name="qty_available"/><field name="standard_price"/><field name="price"/><field name="state"/>
                 </tree>
             </field>
         </record>
@@ -80,7 +115,9 @@
             <field name="model">equipment.product</field>
             <field name="arch" type="xml">
                 <form string="Sản phẩm" version="7.0">
-                    <header><field name="state" widget="statusbar"/></header>
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="in_stock,out_of_stock,obsolete"/>
+                    </header>
                     <sheet>
                         <field name="image" widget="image" class="oe_avatar oe_left"/>
                         <div class="oe_title">
@@ -88,44 +125,7 @@
                             <div><field name="default_code" placeholder="Mã SKU"/></div>
                         </div>
                         <group col="4">
-                            <field name="category_id"/>
-                            <field name="brand_id"/>
-                            <field name="warranty"/>
-                            <field name="qty_available"/>
-                            <field name="standard_price"/>
-                            <field name="price"/>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-
-        <record model="ir.ui.view" id="v_inv_tree">
-            <field name="name">inv.tree</field>
-            <field name="model">equipment.inventory</field>
-            <field name="arch" type="xml">
-                <tree string="Kho hàng" colors="blue:state=='draft';green:state=='done'">
-                    <field name="name"/><field name="product_id"/><field name="type"/><field name="quantity"/><field name="state"/>
-                </tree>
-            </field>
-        </record>
-        <record model="ir.ui.view" id="v_inv_form">
-            <field name="name">inv.form</field>
-            <field name="model">equipment.inventory</field>
-            <field name="arch" type="xml">
-                <form string="Kho" version="7.0">
-                    <header>
-                        <button name="action_done" string="Xác nhận" type="object" states="draft" class="oe_highlight"/>
-                        <field name="state" widget="statusbar"/>
-                    </header>
-                    <sheet>
-                        <div class="oe_title"><h1><field name="name"/></h1></div>
-                        <group col="4">
-                            <field name="product_id"/>
-                            <field name="type"/>
-                            <field name="reason"/>
-                            <field name="quantity"/>
-                            <field name="date"/>
+                            <field name="category_id"/><field name="brand_id"/><field name="warranty"/><field name="qty_available"/><field name="standard_price"/><field name="price"/>
                         </group>
                     </sheet>
                 </form>
@@ -133,27 +133,17 @@
         </record>
 
         <record model="ir.ui.view" id="v_order_graph">
-            <field name="name">order.graph</field>
-            <field name="model">equipment.order</field>
-            <field name="arch" type="xml">
-                <graph string="Doanh thu bán hàng" type="bar">
-                    <field name="order_date"/>
-                    <field name="total_amount"/>
-                </graph>
-            </field>
+            <field name="name">order.graph</field><field name="model">equipment.order</field>
+            <field name="arch" type="xml"><graph string="Doanh thu bán hàng" type="bar"><field name="order_date"/><field name="total_amount"/></graph></field>
         </record>
         <record model="ir.ui.view" id="v_order_tree">
-            <field name="name">order.tree</field>
-            <field name="model">equipment.order</field>
+            <field name="name">order.tree</field><field name="model">equipment.order</field>
             <field name="arch" type="xml">
-                <tree string="Hóa đơn" colors="blue:state=='draft';green:state=='done'">
-                    <field name="name"/><field name="partner_id"/><field name="user_id"/><field name="order_date"/><field name="total_amount"/><field name="payment_status"/><field name="state"/>
-                </tree>
+                <tree string="Hóa đơn" colors="blue:state=='draft';green:state=='done'"><field name="name"/><field name="order_date"/><field name="order_type"/><field name="total_amount"/><field name="state"/></tree>
             </field>
         </record>
         <record model="ir.ui.view" id="v_order_form">
-            <field name="name">order.form</field>
-            <field name="model">equipment.order</field>
+            <field name="name">order.form</field><field name="model">equipment.order</field>
             <field name="arch" type="xml">
                 <form string="Hóa đơn" version="7.0">
                     <header>
@@ -163,19 +153,18 @@
                     <sheet>
                         <div class="oe_title"><h1><field name="name"/></h1></div>
                         <group col="4">
-                            <field name="partner_id"/>
-                            <field name="user_id"/>
+                            <field name="order_type"/>
                             <field name="order_date"/>
                             <field name="payment_status"/>
+                            <field name="partner_id"/>
+                            <field name="user_id"/>
                         </group>
                         <notebook>
                             <page string="Linh kiện &amp; Hàng hóa">
                                 <field name="line_ids">
                                     <tree string="Chi tiết" editable="bottom">
                                         <field name="product_id" on_change="onchange_product_id(product_id)"/>
-                                        <field name="quantity"/>
-                                        <field name="price_unit"/>
-                                        <field name="price_subtotal"/>
+                                        <field name="quantity"/><field name="price_unit"/><field name="price_subtotal"/>
                                     </tree>
                                 </field>
                                 <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
@@ -189,25 +178,16 @@
         </record>
 
         <record model="ir.ui.view" id="v_warranty_tree">
-            <field name="name">warranty.tree</field>
-            <field name="model">equipment.warranty</field>
-            <field name="arch" type="xml"><tree string="Bảo hành" colors="red:state=='expired'"><field name="name"/><field name="product_id"/><field name="partner_id"/><field name="end_date"/><field name="state"/></tree></field>
+            <field name="name">warranty.tree</field><field name="model">equipment.warranty</field>
+            <field name="arch" type="xml"><tree string="Bảo hành" colors="red:state=='expired'"><field name="name"/><field name="product_id"/><field name="end_date"/><field name="state"/></tree></field>
         </record>
         <record model="ir.ui.view" id="v_warranty_form">
-            <field name="name">warranty.form</field>
-            <field name="model">equipment.warranty</field>
+            <field name="name">warranty.form</field><field name="model">equipment.warranty</field>
             <field name="arch" type="xml">
                 <form string="Bảo hành" version="7.0">
                     <sheet>
                         <div class="oe_title"><h1><field name="name" placeholder="Nhập Serial..."/></h1></div>
-                        <group col="4">
-                            <field name="product_id"/>
-                            <field name="partner_id"/>
-                            <field name="order_id"/>
-                            <field name="purchase_date"/>
-                            <field name="end_date"/>
-                            <field name="state"/>
-                        </group>
+                        <group col="4"><field name="product_id"/><field name="partner_id"/><field name="order_id"/><field name="purchase_date"/><field name="end_date"/><field name="state"/></group>
                     </sheet>
                 </form>
             </field>
@@ -216,28 +196,12 @@
         <record model="ir.actions.act_window" id="act_order_sale"><field name="name">Hóa đơn Bán hàng</field><field name="res_model">equipment.order</field><field name="view_mode">tree,form,graph</field><field name="domain">[('order_type','=','sale')]</field><field name="context">{'default_order_type':'sale'}</field></record>
         <record model="ir.actions.act_window" id="act_order_purch"><field name="name">Hóa đơn Nhập hàng</field><field name="res_model">equipment.order</field><field name="view_mode">tree,form</field><field name="domain">[('order_type','=','purchase')]</field><field name="context">{'default_order_type':'purchase'}</field></record>
         <record model="ir.actions.act_window" id="act_dashboard_revenue"><field name="name">Biểu đồ Doanh Thu</field><field name="res_model">equipment.order</field><field name="view_mode">graph</field><field name="domain">[('order_type','=','sale'),('state','=','done')]</field></record>
-        
         <record model="ir.actions.act_window" id="act_prod_all"><field name="name">Tất cả Linh kiện</field><field name="res_model">equipment.product</field><field name="view_mode">tree,form</field></record>
         <record model="ir.actions.act_window" id="act_prod_alert"><field name="name">Cảnh báo Tồn kho thấp</field><field name="res_model">equipment.product</field><field name="view_mode">tree,form</field><field name="domain">[('qty_available','&lt;',5)]</field></record>
-        
-        <record model="ir.actions.act_window" id="act_partner_cust"><field name="name">Khách hàng</field><field name="res_model">equipment.partner</field><field name="view_mode">tree,form</field><field name="domain">[('is_customer','=',True)]</field><field name="context">{'default_is_customer':True, 'default_is_supplier':False}</field></record>
-        <record model="ir.actions.act_window" id="act_partner_supp"><field name="name">Nhà cung cấp</field><field name="res_model">equipment.partner</field><field name="view_mode">tree,form</field><field name="domain">[('is_supplier','=',True)]</field><field name="context">{'default_is_customer':False, 'default_is_supplier':True}</field></record>
-        
-        <record model="ir.actions.act_window" id="act_inv_in">
-            <field name="name">Phiếu Nhập kho</field>
-            <field name="res_model">equipment.inventory</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">[('type','=','in')]</field>
-            <field name="context">{'default_type': 'in'}</field>
-        </record>
-
-        <record model="ir.actions.act_window" id="act_inv_out">
-            <field name="name">Phiếu Xuất kho</field>
-            <field name="res_model">equipment.inventory</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">[('type','=','out')]</field>
-            <field name="context">{'default_type': 'out'}</field>
-        </record>
+        <record model="ir.actions.act_window" id="act_partner_cust"><field name="name">Khách hàng</field><field name="res_model">equipment.partner</field><field name="view_mode">tree,form</field><field name="domain">[]</field><field name="context">{}</field></record>
+        <record model="ir.actions.act_window" id="act_partner_supp"><field name="name">Nhà cung cấp</field><field name="res_model">equipment.supplier</field><field name="view_mode">tree,form</field><field name="domain">[]</field><field name="context">{}</field></record>
+        <record model="ir.actions.act_window" id="act_inv_in"><field name="name">Phiếu Nhập kho</field><field name="res_model">equipment.inventory</field><field name="view_mode">tree,form</field><field name="domain">[('type','=','in')]</field><field name="context">{'default_type': 'in'}</field></record>
+        <record model="ir.actions.act_window" id="act_inv_out"><field name="name">Phiếu Xuất kho</field><field name="res_model">equipment.inventory</field><field name="view_mode">tree,form</field><field name="domain">[('type','=','out')]</field><field name="context">{'default_type': 'out'}</field></record>
         <record model="ir.actions.act_window" id="act_warranty"><field name="name">Tra cứu Serial Bảo hành</field><field name="res_model">equipment.warranty</field><field name="view_mode">tree,form</field></record>
         <record model="ir.actions.act_window" id="act_cat"><field name="name">Nhóm linh kiện</field><field name="res_model">equipment.category</field><field name="view_mode">tree,form</field></record>
         <record model="ir.actions.act_window" id="act_brand"><field name="name">Thương hiệu</field><field name="res_model">equipment.brand</field><field name="view_mode">tree,form</field></record>

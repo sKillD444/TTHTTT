@@ -17,6 +17,7 @@
         <menuitem id="m_inv_in" name="Phiếu Nhập kho" parent="m_stock" action="act_inv_in" sequence="1"/>
         <menuitem id="m_inv_out" name="Phiếu Xuất kho" parent="m_stock" action="act_inv_out" sequence="2"/>
         <menuitem id="m_prod_alert" name="Cảnh báo Tồn kho" parent="m_stock" action="act_prod_alert" sequence="3"/>
+        <menuitem id="m_stock_full" name="Tổng hợp kho" parent="m_stock" action="act_prod_all" sequence="4"/>
 
         <menuitem id="m_cat" name="Nhóm linh kiện" parent="m_brand_cat" action="act_cat" sequence="1"/>
         <menuitem id="m_brand" name="Thương hiệu (Hãng)" parent="m_brand_cat" action="act_brand" sequence="2"/>

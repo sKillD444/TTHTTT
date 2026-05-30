@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data noupdate="1">
-        <record id="cat_cpu" model="equipment.category"><field name="code">CPU</field><field name="name">Vi xử lý (CPU)</field></record>
-        <record id="cat_ram" model="equipment.category"><field name="code">RAM</field><field name="name">Bộ nhớ trong (RAM)</field></record>
-        <record id="cat_vga" model="equipment.category"><field name="code">VGA</field><field name="name">Card màn hình (VGA)</field></record>
-        <record id="cat_main" model="equipment.category"><field name="code">MAIN</field><field name="name">Bo mạch chủ (Mainboard)</field></record>
+        <record id="cat_cpu" model="equipment.category"><field name="code">CPU demo</field><field name="name">Vi xử lý (CPU)</field></record>
+        <record id="cat_ram" model="equipment.category"><field name="code">RAM demo</field><field name="name">Bộ nhớ trong (RAM)</field></record>
+        <record id="cat_vga" model="equipment.category"><field name="code">VGA demo</field><field name="name">Card màn hình (VGA)</field></record>
+        <record id="cat_main" model="equipment.category"><field name="code">MAIN demo</field><field name="name">Bo mạch chủ (Mainboard)</field></record>
 
-        <record id="brand_asus" model="equipment.brand"><field name="name">ASUS</field><field name="hotline">1800-6588</field></record>
-        <record id="brand_msi" model="equipment.brand"><field name="name">MSI</field></record>
-        <record id="brand_intel" model="equipment.brand"><field name="name">Intel</field></record>
+        <record id="brand_asus" model="equipment.brand"><field name="name">ASUS demo</field><field name="hotline">1800-6588</field></record>
+        <record id="brand_msi" model="equipment.brand"><field name="name">MSI demo</field></record>
+        <record id="brand_intel" model="equipment.brand"><field name="name">Intel demo</field></record>
 
-        <record id="supp_1" model="equipment.partner"><field name="name">Nhà phân phối Viết Sơn</field><field name="is_supplier">True</field><field name="is_customer">False</field></record>
+        <record id="supp_1" model="equipment.supplier"><field name="code">NCC_VIETSON</field><field name="name">Nhà phân phối Viết Sơn</field></record>
         <record id="cust_1" model="equipment.partner"><field name="name">Nguyễn Văn A</field><field name="phone">0909123456</field><field name="membership_tier">silver</field><field name="points">150</field></record>
 
         <record id="prod_vga" model="equipment.product">
